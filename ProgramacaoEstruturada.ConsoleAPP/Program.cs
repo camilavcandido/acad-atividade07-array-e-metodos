@@ -19,7 +19,7 @@ namespace ProgramacaoEstruturada.ConsoleAPP
             while (continuar)
             {
 
-                int opcao = 0; // menu
+                string opcao = ""; // menu
                 apresentaMenu();
                 switchMenu(opcao, valores);
 
@@ -183,43 +183,60 @@ namespace ProgramacaoEstruturada.ConsoleAPP
                     "\tOpção 4 - encontrar os 3 maiores valores da sequência\n" +
                     "\tOpção 5 - encontrar os valores negativos da sequência\n" +
                     "\tOpção 6 - vizualizar todos os valores da sequência\n" +
-                    "\tOpção 7 - remover um item da sequência");
+                    "\tOpção 7 - remover um item da sequência\n"+
+                    "\tOpção 8 - criar nova sequência\n"+ //ainda nao implementada
+                    "\tOpção 9 - sair"); 
             }
 
-            static int obtemOpcaoMenu(int opcao)
+            static string obtemOpcaoMenu(string opcao)
             {
                 Console.Write("\n\tEscolha uma opção: ");
-                opcao = int.Parse(Console.ReadLine());
+                opcao = Console.ReadLine();
                 Console.WriteLine(" ");
 
+                while(opcao != "1" && opcao != "2" && opcao != "3" && opcao != "4" && opcao != "5" &&
+                    opcao != "6" && opcao != "7" && opcao != "8" && opcao != "9")
+                {
+                    ApresentaMensagem("Opção inválida!", ConsoleColor.Red);
+                    Console.Write("\n\tEscolha uma opção: ");
+                    opcao =Console.ReadLine();
+                }
                 return opcao;
             }
 
-            static void switchMenu(int opcao, int[] valores)
+            static void switchMenu(string opcao, int[] valores)
             {
                 switch (obtemOpcaoMenu(opcao))
                 {
-                    case 1:
+                    case "1":
                         Console.WriteLine("Maior valor: {0}", obtemMaiorValor(valores));
                         break;
-                    case 2:
+                    case "2":
                         Console.WriteLine("Menor valor: {0}", obtemMenorValor(valores));
                         break;
-                    case 3:
+                    case "3":
                         Console.WriteLine("Média aritmética: {0}", calculaMedia(valores));
                         break;
-                    case 4:
+                    case "4":
                         Console.WriteLine("Três maiores valores: {0}", tresMaioresValores(valores));
                         break;
-                    case 5:
+                    case "5":
                         valoresNegativos(valores);
                         break;
-                    case 6:
+                    case "6":
                         mostrarValores(valores);
                         break;
-                    case 7:
+                    case "7":
                         removeItem(valores);
                         break;
+                    case "8":
+                        Console.WriteLine("teste 8");
+                        break;
+                    case "9":
+                        Environment.Exit(0);
+                        break;
+
+
                 }
 
             }
@@ -232,7 +249,7 @@ namespace ProgramacaoEstruturada.ConsoleAPP
 
                 while (rContinuar != '1' && rContinuar != '0')
                 {
-                    Console.WriteLine("Opção inválida!");
+                    ApresentaMensagem("Opção inválida!", ConsoleColor.Red);
                     Console.WriteLine("Deseja realizar outro comando? \n1 = sim, 0 = sair");
                      rContinuar = char.Parse(Console.ReadLine());
                 }
@@ -244,10 +261,17 @@ namespace ProgramacaoEstruturada.ConsoleAPP
                 }
                 else if (rContinuar == '0')
                 {
-                    continuar = false;
+                    Environment.Exit(0);
                 }
 
                 return continuar;
+            }
+            
+            static void ApresentaMensagem(string mensagem, ConsoleColor cor)
+            {
+                Console.ForegroundColor = cor;
+                Console.WriteLine(mensagem);
+                Console.ResetColor();
             }
             #endregion;
         }
