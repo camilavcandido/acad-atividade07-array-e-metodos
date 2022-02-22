@@ -8,11 +8,12 @@ namespace ProgramacaoEstruturada.ConsoleAPP
         {
             Console.WriteLine("Programação Estruturada\n");
 
-            //array de valors, com 10 posições
-            int[] valores = new int[10];
+            int[] valores = new int[10]; //array de valores, com 10 posições
 
             Console.WriteLine("Digite 10 valores inteiros: ");
             obtemEntradaValores(valores);
+
+            int maiorValor = 0;
 
             Console.WriteLine(" ");
             bool continuar = true;
@@ -41,9 +42,9 @@ namespace ProgramacaoEstruturada.ConsoleAPP
 
             }
 
-            static int obtemMaiorValor(int[] valores)
+             public static int obtemMaiorValor(int[] valores, ref int maiorValor)
             {
-                int maiorValor = valores[0];
+                
                 for (int j = 0; j < 10; j++)
                 {
                     if (valores[j] > maiorValor)
@@ -163,18 +164,29 @@ namespace ProgramacaoEstruturada.ConsoleAPP
                 Console.Write("Digite o valor da posição: ");
                 int posicaoItemRemovido = int.Parse(Console.ReadLine());
 
-                Console.WriteLine("Nova sequência: ");
-                for (int i = 0; i < 10; i++)
+                while (posicaoItemRemovido < 0 && posicaoItemRemovido > 9)
                 {
-                    if (i != posicaoItemRemovido)
+                    ApresentaMensagem("Opção inválida!", ConsoleColor.Red);
+
+                   Console.Write("Digite o valor da posição: ");
+                   posicaoItemRemovido = int.Parse(Console.ReadLine());
+                } 
+                
+                    ApresentaMensagem("Nova sequência: ", ConsoleColor.Green); 
+                    for (int i = 0; i < 10; i++)
                     {
-                        Console.Write(valores[i] + " ");
+                        if (i != posicaoItemRemovido)
+                        {
+                            Console.Write(valores[i] + " ");
+                        }
                     }
-                }
+                
+
+
 
             }
 
-            static void apresentaMenu()
+           public static void apresentaMenu()
             {
                 Console.WriteLine("" +
                     "\tOpção 1 - encontrar o maior valor\n" +
@@ -188,7 +200,7 @@ namespace ProgramacaoEstruturada.ConsoleAPP
                     "\tOpção 9 - sair"); 
             }
 
-            static string obtemOpcaoMenu(string opcao)
+            public static string obtemOpcaoMenu(string opcao)
             {
                 Console.Write("\n\tEscolha uma opção: ");
                 opcao = Console.ReadLine();
@@ -204,12 +216,12 @@ namespace ProgramacaoEstruturada.ConsoleAPP
                 return opcao;
             }
 
-            static void switchMenu(string opcao, int[] valores)
+            public static void switchMenu(string opcao, int[] valores)
             {
                 switch (obtemOpcaoMenu(opcao))
                 {
                     case "1":
-                        Console.WriteLine("Maior valor: {0}", obtemMaiorValor(valores));
+                      obtemMaiorValor(valores, ref maiorValor);
                         break;
                     case "2":
                         Console.WriteLine("Menor valor: {0}", obtemMenorValor(valores));
