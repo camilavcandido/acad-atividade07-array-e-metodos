@@ -10,7 +10,7 @@ namespace ProgramacaoEstruturada.ConsoleAPP
 
 
             int[] valores = new int[10]; //array de valores, com 10 posições
-            int menorValor;
+            int menorValor;//armazena menor valor do array valores
 
 
             Console.WriteLine("Digite 10 valores inteiros: ");
@@ -28,8 +28,9 @@ namespace ProgramacaoEstruturada.ConsoleAPP
                 continuarPrograma(continuar);
 
             }
+
             #region metodos
-             static void obtemEntradaValores(int[] valores)
+            static void obtemEntradaValores(int[] valores)
             {
                 int qtdValores = 0;
 
@@ -42,7 +43,7 @@ namespace ProgramacaoEstruturada.ConsoleAPP
 
             }
 
-             static int obtemMaiorValor(ref int[]  valores)
+            static int obtemMaiorValor(ref int[] valores)
             {
                 int maiorValor = 0;
 
@@ -170,19 +171,19 @@ namespace ProgramacaoEstruturada.ConsoleAPP
                 {
                     ApresentaMensagem("Opção inválida!", ConsoleColor.Red);
 
-                   Console.Write("Digite o valor da posição: ");
-                   posicaoItemRemovido = int.Parse(Console.ReadLine());
-                } 
-                
-                    ApresentaMensagem("Nova sequência: ", ConsoleColor.Green); 
-                    for (int i = 0; i < 10; i++)
+                    Console.Write("Digite o valor da posição: ");
+                    posicaoItemRemovido = int.Parse(Console.ReadLine());
+                }
+
+                ApresentaMensagem("Nova sequência: ", ConsoleColor.Green);
+                for (int i = 0; i < 10; i++)
+                {
+                    if (i != posicaoItemRemovido)
                     {
-                        if (i != posicaoItemRemovido)
-                        {
-                            Console.Write(valores[i] + " ");
-                        }
+                        Console.Write(valores[i] + " ");
                     }
-                
+                }
+
 
 
 
@@ -197,36 +198,36 @@ namespace ProgramacaoEstruturada.ConsoleAPP
                     "\tOpção 4 - encontrar os 3 maiores valores da sequência\n" +
                     "\tOpção 5 - encontrar os valores negativos da sequência\n" +
                     "\tOpção 6 - vizualizar todos os valores da sequência\n" +
-                    "\tOpção 7 - remover um item da sequência\n"+
-                    "\tOpção 8 - criar nova sequência\n"+ //ainda nao implementada
-                    "\tOpção 9 - sair"); 
+                    "\tOpção 7 - remover um item da sequência\n" +
+                    "\tOpção 8 - criar nova sequência\n" + //ainda nao implementada
+                    "\tOpção 9 - sair");
             }
 
-             static string obtemOpcaoMenu(string opcao)
+            static string obtemOpcaoMenu(string opcao)
             {
                 Console.Write("\n\tEscolha uma opção: ");
                 opcao = Console.ReadLine();
                 Console.WriteLine(" ");
 
-                while(opcao != "1" && opcao != "2" && opcao != "3" && opcao != "4" && opcao != "5" &&
+                while (opcao != "1" && opcao != "2" && opcao != "3" && opcao != "4" && opcao != "5" &&
                     opcao != "6" && opcao != "7" && opcao != "8" && opcao != "9")
                 {
                     ApresentaMensagem("Opção inválida!", ConsoleColor.Red);
                     Console.Write("\n\tEscolha uma opção: ");
-                    opcao =Console.ReadLine();
+                    opcao = Console.ReadLine();
                 }
                 return opcao;
             }
 
-             static void switchMenu(string opcao, int[] valores)
+            static void switchMenu(string opcao, int[] valores)
             {
                 switch (obtemOpcaoMenu(opcao))
                 {
                     case "1":
-                        Console.WriteLine("Maior valor: {0}",obtemMaiorValor(ref valores));
+                        Console.WriteLine("Maior valor: {0}", obtemMaiorValor(ref valores));
                         break;
                     case "2":
-                        Console.WriteLine("Menor valor: {0}",obtemMenorValor(valores, out int menorValor ));
+                        Console.WriteLine("Menor valor: {0}", obtemMenorValor(valores, out int menorValor));
                         break;
                     case "3":
                         Console.WriteLine("Média aritmética: {0}", calculaMedia(valores));
@@ -244,13 +245,13 @@ namespace ProgramacaoEstruturada.ConsoleAPP
                         removeItem(valores);
                         break;
                     case "8":
-                        Console.WriteLine("teste 8");
+                        Console.WriteLine("Digite 10 valores inteiros: ");
+                        obtemEntradaValores(valores);
+                        ApresentaMensagem("Nova sequencia criada com sucesso!", ConsoleColor.Green);
                         break;
                     case "9":
                         Environment.Exit(0);
                         break;
-
-
                 }
 
             }
@@ -265,7 +266,7 @@ namespace ProgramacaoEstruturada.ConsoleAPP
                 {
                     ApresentaMensagem("Opção inválida!", ConsoleColor.Red);
                     Console.WriteLine("Deseja realizar outro comando? \n1 = sim, 0 = sair");
-                     rContinuar =(Console.ReadLine());
+                    rContinuar = (Console.ReadLine());
                 }
 
                 if (rContinuar == "1")
@@ -280,7 +281,7 @@ namespace ProgramacaoEstruturada.ConsoleAPP
 
                 return continuar;
             }
-            
+
             static void ApresentaMensagem(string mensagem, ConsoleColor cor)
             {
                 Console.ForegroundColor = cor;
