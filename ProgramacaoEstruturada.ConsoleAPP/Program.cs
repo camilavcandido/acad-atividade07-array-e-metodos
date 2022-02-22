@@ -16,9 +16,6 @@ namespace ProgramacaoEstruturada.ConsoleAPP
             Console.WriteLine("Digite 10 valores inteiros: ");
             obtemEntradaValores(valores);
 
-
-
-
             Console.WriteLine(" ");
             bool continuar = true;
             while (continuar)
@@ -226,10 +223,10 @@ namespace ProgramacaoEstruturada.ConsoleAPP
                 switch (obtemOpcaoMenu(opcao))
                 {
                     case "1":
-                        Console.WriteLine(obtemMaiorValor(ref valores));
+                        Console.WriteLine("Maior valor: {0}",obtemMaiorValor(ref valores));
                         break;
                     case "2":
-                        Console.WriteLine(obtemMenorValor(valores, out int menorValor ));
+                        Console.WriteLine("Menor valor: {0}",obtemMenorValor(valores, out int menorValor ));
                         break;
                     case "3":
                         Console.WriteLine("Média aritmética: {0}", calculaMedia(valores));
@@ -262,21 +259,21 @@ namespace ProgramacaoEstruturada.ConsoleAPP
             {
                 Console.WriteLine("");
                 Console.WriteLine("Deseja realizar outro comando? \n1 = sim, 0 = sair");
-                char rContinuar = char.Parse(Console.ReadLine());
+                string rContinuar = Console.ReadLine();
 
-                while (rContinuar != '1' && rContinuar != '0')
+                while (rContinuar != "1" && rContinuar != "0")
                 {
                     ApresentaMensagem("Opção inválida!", ConsoleColor.Red);
                     Console.WriteLine("Deseja realizar outro comando? \n1 = sim, 0 = sair");
-                     rContinuar = char.Parse(Console.ReadLine());
+                     rContinuar =(Console.ReadLine());
                 }
 
-                if (rContinuar == '1')
+                if (rContinuar == "1")
                 {
                     Console.Clear();
                     continuar = true;
                 }
-                else if (rContinuar == '0')
+                else if (rContinuar == "0")
                 {
                     Environment.Exit(0);
                 }
