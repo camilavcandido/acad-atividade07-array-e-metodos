@@ -8,18 +8,21 @@ namespace ProgramacaoEstruturada.ConsoleAPP
         {
             Console.WriteLine("Programação Estruturada\n");
 
+
             int[] valores = new int[10]; //array de valores, com 10 posições
+            int menorValor;
+
 
             Console.WriteLine("Digite 10 valores inteiros: ");
             obtemEntradaValores(valores);
 
-            int maiorValor = 0;
+
+
 
             Console.WriteLine(" ");
             bool continuar = true;
             while (continuar)
             {
-
                 string opcao = ""; // menu
                 apresentaMenu();
                 switchMenu(opcao, valores);
@@ -29,7 +32,7 @@ namespace ProgramacaoEstruturada.ConsoleAPP
 
             }
             #region metodos
-            static void obtemEntradaValores(int[] valores)
+             static void obtemEntradaValores(int[] valores)
             {
                 int qtdValores = 0;
 
@@ -42,9 +45,11 @@ namespace ProgramacaoEstruturada.ConsoleAPP
 
             }
 
-             public static int obtemMaiorValor(int[] valores, ref int maiorValor)
+             static int obtemMaiorValor(ref int[]  valores)
             {
-                
+                int maiorValor = 0;
+
+
                 for (int j = 0; j < 10; j++)
                 {
                     if (valores[j] > maiorValor)
@@ -56,9 +61,9 @@ namespace ProgramacaoEstruturada.ConsoleAPP
 
             }
 
-            static int obtemMenorValor(int[] valores)
+            static int obtemMenorValor(int[] valores, out int menorValor)
             {
-                int menorValor = valores[0];
+                menorValor = valores[0];
                 for (int j = 0; j < 10; j++)
                 {
                     if (valores[j] < menorValor)
@@ -186,7 +191,7 @@ namespace ProgramacaoEstruturada.ConsoleAPP
 
             }
 
-           public static void apresentaMenu()
+            static void apresentaMenu()
             {
                 Console.WriteLine("" +
                     "\tOpção 1 - encontrar o maior valor\n" +
@@ -200,7 +205,7 @@ namespace ProgramacaoEstruturada.ConsoleAPP
                     "\tOpção 9 - sair"); 
             }
 
-            public static string obtemOpcaoMenu(string opcao)
+             static string obtemOpcaoMenu(string opcao)
             {
                 Console.Write("\n\tEscolha uma opção: ");
                 opcao = Console.ReadLine();
@@ -216,15 +221,15 @@ namespace ProgramacaoEstruturada.ConsoleAPP
                 return opcao;
             }
 
-            public static void switchMenu(string opcao, int[] valores)
+             static void switchMenu(string opcao, int[] valores)
             {
                 switch (obtemOpcaoMenu(opcao))
                 {
                     case "1":
-                      obtemMaiorValor(valores, ref maiorValor);
+                        Console.WriteLine(obtemMaiorValor(ref valores));
                         break;
                     case "2":
-                        Console.WriteLine("Menor valor: {0}", obtemMenorValor(valores));
+                        Console.WriteLine(obtemMenorValor(valores, out int menorValor ));
                         break;
                     case "3":
                         Console.WriteLine("Média aritmética: {0}", calculaMedia(valores));
